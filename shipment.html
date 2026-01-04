@@ -20,7 +20,7 @@
         <div>
             <h2 class="text-4xl font-black mb-2">Live Tracking</h2>
             <div class="flex gap-4 max-w-2xl mt-6">
-                <input id="search-id" type="text" placeholder="Resi Number (e.g. TRX-XXXX)..." class="flex-1 border p-5 rounded-[1.5rem] outline-indigo-600 shadow-sm font-bold">
+                <input id="search-id" type="text" placeholder="Tracking Number (e.g. TRX-XXXX)..." class="flex-1 border p-5 rounded-[1.5rem] outline-indigo-600 shadow-sm font-bold">
                 <button onclick="track()" class="bg-indigo-600 text-white px-10 rounded-[1.5rem] font-bold shadow-xl hover:bg-indigo-700 transition">Track Package</button>
             </div>
         </div>
@@ -39,7 +39,7 @@
 
         async function track() {
             const pid = document.getElementById('search-id').value;
-            if(!pid) return alert("Masukkan nomor resi dulu!");
+                  if(!pid) return alert("Please enter a tracking number.");
 
             const res = await fetch('https://18223042.tesatepadang.space/api/shipments/', { 
                 headers: { "Authorization": AUTH } 
@@ -47,7 +47,7 @@
             const data = await res.json();
             const s = data.find(i => i.tracking_number == pid);
 
-            if(!s) return alert("Package Not Found!");
+            if(!s) return alert("Package not found!");
 
             // Cek apakah statusnya sudah DELIVERED
             const isDelivered = s.status === 'DELIVERED';
@@ -101,10 +101,10 @@
             
             if (type === 'location') {
                 const loc = document.getElementById('updLoc').value;
-                if (!loc) return alert("Isi nama kota dulu!");
+                    if (!loc) return alert("Please enter a city name.");
                 payload = { location: loc };
-            } else if (type === 'delivered') {
-                if(!confirm("Yakin paket sudah sampai di tujuan?")) return;
+                } else if (type === 'delivered') {
+                if(!confirm("Are you sure the package has been delivered?")) return;
                 payload = { 
                     status: "DELIVERED", 
                     location: "Destination (Received by Customer)" 
@@ -122,7 +122,7 @@
                     track(); // Refresh detail display
                     loadLog(); // Refresh table
                 } else {
-                    alert("Gagal update status!");
+                    alert("Failed to update status!");
                 }
             } catch (e) {
                 console.error(e);

@@ -117,7 +117,7 @@
         async function ship(id) {
             const courier = document.getElementById(`courier-${id}`).value;
 
-            if(!confirm(`Kirim paket #${id} menggunakan ${courier}?`)) return;
+            if(!confirm(`Confirm shipment of package #${id} via ${courier}?`)) return;
 
             try {
                 const res = await fetch('https://18223042.tesatepadang.space/api/shipments/', {
@@ -130,14 +130,14 @@
                 });
 
                 if(res.ok) {
-                    alert(`Berhasil! Paket sedang dikirim via ${courier}`);
+                    alert(`Success! Package is being shipped via ${courier}.`);
                     load(); 
                 } else {
                     const err = await res.json();
-                    alert("Gagal: " + (err.error || "Internal Server Error"));
+                    alert("Failed: " + (err.error || "Internal Server Error"));
                 }
             } catch (e) {
-                alert("Koneksi ke Shipment Service terputus!");
+                alert("Connection to shipment service lost!");
             }
         }
         window.onload = load;
