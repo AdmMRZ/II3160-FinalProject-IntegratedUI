@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Logistics | Dashboard</title>
+    <title>LogTrack | Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="style.css">
@@ -10,7 +10,7 @@
 <body class="flex h-screen overflow-hidden bg-slate-50">
     <aside class="w-72 bg-slate-950 text-white flex flex-col p-6 shadow-2xl">
         <div class="text-2xl font-black mb-10 flex items-center gap-3 text-white">
-            <i data-lucide="package-search" class="text-indigo-500"></i> LOGISTICS
+            <i data-lucide="package-search" class="text-indigo-500"></i> LogTrack
         </div>
         <nav class="flex-1 space-y-2">
             <a href="index.html" class="flex items-center p-4 bg-indigo-600 rounded-2xl font-bold transition shadow-lg">
@@ -74,9 +74,6 @@
         <div class="bg-gradient-to-br from-indigo-600 to-violet-700 rounded-[2.5rem] p-12 text-white shadow-2xl relative overflow-hidden">
             <div class="relative z-10">
                 <h3 class="text-4xl font-black mb-4">Multi-Service Sync</h3>
-                <p class="text-indigo-100 max-w-xl text-lg leading-relaxed opacity-80 font-medium">
-                    This dashboard pulls live data from Repo 1 (Warehouse Core) for inventory tracking and Repo 2 (Shipment Service) for logistical status updates.
-                </p>
             </div>
             <i data-lucide="share-2" class="absolute right-[-20px] bottom-[-20px] w-64 h-64 text-white opacity-10"></i>
         </div>
@@ -89,8 +86,8 @@
         async function loadStats() {
             try {
                 const [resWarehouse, resShipment] = await Promise.all([
-                    fetch('http://localhost:8000/api/packages/', { headers: { "Authorization": AUTH } }),
-                    fetch('http://localhost:8001/api/shipments/', { headers: { "Authorization": AUTH } })
+                    fetch('https://18223015.tesatepadang.space/api/packages/', { headers: { "Authorization": AUTH } }),
+                    fetch('https://18223042.tesatepadang.space/api/shipments/', { headers: { "Authorization": AUTH } })
                 ]);
 
                 const warehouseData = await resWarehouse.json();
